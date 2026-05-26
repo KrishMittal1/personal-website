@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Krish Mittal — Aspiring Robotics Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112240;
+    --teal: #0d9488;
+    --teal-light: #14b8a6;
+    --grey: #6b7280;
+    --grey-light: #9ca3af;
+    --off-white: #f8fafc;
+    --white: #ffffff;
+    --border: #e5e7eb;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Plus Jakarta Sans', sans-serif;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: var(--sans);
+    color: var(--navy);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--off-white); }
+  ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+
+  /* ── Noise Overlay ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ────────────────────── NAVBAR ────────────────────── */
+  #navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    transition: var(--transition);
+    padding: 28px 0;
+  }
+  #navbar.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 14px 0;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    transition: color var(--transition);
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--teal);
+    transition: width var(--transition);
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--navy); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-cta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--teal) !important;
+    border: 1.5px solid var(--teal);
+    padding: 7px 18px;
+    border-radius: 100px;
+    transition: all var(--transition) !important;
+  }
+  .nav-cta:hover { background: var(--teal); color: white !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ────────────────────── HERO ────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .hero-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .hero-bg-blob {
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 680px; height: 680px;
+    background: radial-gradient(ellipse at center, rgba(13,148,136,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 80px;
+    align-items: center;
+    padding-top: 100px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1.5px;
+    background: var(--teal);
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 6vw, 5.5rem);
+    line-height: 1.0;
+    color: var(--navy);
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--grey);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero-tagline {
+    font-size: 0.95rem;
+    color: var(--grey-light);
+    margin-bottom: 44px;
+    max-width: 460px;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--navy);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: all var(--transition);
+    border: 1.5px solid var(--navy);
+  }
+  .btn-primary:hover {
+    background: var(--teal);
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(13,148,136,0.25);
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--navy);
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: all var(--transition);
+    border: 1.5px solid var(--border);
+  }
+  .btn-secondary:hover {
+    border-color: var(--navy);
+    transform: translateY(-2px);
+  }
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 52px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+  .hero-stat-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey-light);
+    margin-top: 5px;
+  }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .headshot-wrap {
+    position: relative;
+    width: 320px;
+    height: 380px;
+  }
+  .headshot-frame {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(145deg, var(--off-white) 0%, #e2e8f0 100%);
+  }
+  #headshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+  }
+  /* Placeholder styling when no image */
+  .headshot-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+    border-radius: 24px;
+    gap: 12px;
+  }
+  .headshot-placeholder svg { opacity: 0.3; }
+  .headshot-placeholder span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey-light);
+  }
+  .headshot-accent {
+    position: absolute;
+    bottom: -12px; right: -12px;
+    width: 80px; height: 80px;
+    border: 2px solid var(--teal);
+    border-radius: 16px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .headshot-accent2 {
+    position: absolute;
+    top: -12px; left: -12px;
+    width: 50px; height: 50px;
+    border: 2px solid var(--navy);
+    border-radius: 10px;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--navy);
+    color: white;
+    padding: 9px 18px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .hero-badge .dot {
+    width: 7px; height: 7px;
+    background: var(--teal-light);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+
+  /* ────────────────────── SECTION SHARED ────────────────────── */
+  section {
+    padding: 100px 0;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1.5px;
+    background: var(--teal);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--navy);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-subtitle {
+    font-size: 1rem;
+    color: var(--grey);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ────────────────────── ABOUT ────────────────────── */
+  #about { background: var(--off-white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 52px;
+  }
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--grey);
+    margin-bottom: 20px;
+  }
+  .about-text p strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .highlight-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all var(--transition);
+  }
+  .highlight-card:hover {
+    border-color: var(--teal);
+    transform: translateX(6px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .highlight-icon {
+    width: 44px; height: 44px;
+    background: rgba(13,148,136,0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+  }
+  .highlight-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .highlight-card p {
+    font-size: 0.82rem;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  /* ────────────────────── EXPERIENCE ────────────────────── */
+  #experience { background: var(--white); }
+  .timeline {
+    margin-top: 52px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-item {
+    padding-left: 68px;
+    position: relative;
+    margin-bottom: 48px;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: 0; top: 4px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all var(--transition);
+    z-index: 1;
+  }
+  .timeline-item:hover .timeline-dot {
+    border-color: var(--teal);
+    background: rgba(13,148,136,0.06);
+    transform: scale(1.1);
+  }
+  .timeline-content {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    transition: all var(--transition);
+  }
+  .timeline-item:hover .timeline-content {
+    border-color: rgba(13,148,136,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  }
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .timeline-role {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .timeline-date {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    background: rgba(13,148,136,0.08);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .timeline-date.current {
+    background: rgba(13,148,136,0.12);
+    color: var(--teal);
+  }
+  .timeline-org {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--grey);
+    margin-bottom: 16px;
+  }
+  .timeline-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .timeline-bullets li {
+    font-size: 0.88rem;
+    color: var(--grey);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+  .timeline-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 5px; height: 5px;
+    background: var(--teal);
+    border-radius: 50%;
+  }
+  .timeline-bullets li strong { color: var(--navy); }
+
+  /* ────────────────────── PROJECTS ────────────────────── */
+  #projects { background: var(--off-white); }
+  .projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 52px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all var(--transition);
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+  }
+  .project-card:hover {
+    border-color: rgba(13,148,136,0.35);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.09);
+  }
+  .project-card.featured {
+    grid-column: span 2;
+  }
+  .project-visual {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, var(--navy) 0%, var(--navy-mid) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .project-card.featured .project-visual { height: 240px; }
+  .project-visual-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image:
+      repeating-linear-gradient(45deg, var(--teal) 0, var(--teal) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+  .project-visual-icon {
+    font-size: 3.5rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  }
+  .project-visual .video-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+  .project-visual .video-wrapper iframe {
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .project-body {
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: rgba(13,148,136,0.08);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .tag.dark {
+    color: var(--grey);
+    background: var(--off-white);
+  }
+  .project-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.84rem;
+    color: var(--grey);
+    line-height: 1.65;
+    flex: 1;
+  }
+  .project-awards {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .award-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--navy);
+    background: rgba(10,22,40,0.06);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+  .award-pill .star { color: #f59e0b; }
+
+  /* ────────────────────── SKILLS ────────────────────── */
+  #skills { background: var(--white); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 52px;
+  }
+  .skill-group {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    transition: all var(--transition);
+  }
+  .skill-group:hover {
+    border-color: rgba(13,148,136,0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .skill-group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-group-icon {
+    font-size: 1.3rem;
+  }
+  .skill-group-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .skill-pill {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--navy);
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 5px 13px;
+    border-radius: 100px;
+    transition: all var(--transition);
+  }
+  .skill-pill:hover {
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
+    transform: translateY(-1px);
+  }
+
+  /* ────────────────────── CONTACT ────────────────────── */
+  #contact {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(ellipse at center, rgba(13,148,136,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .contact-inner {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-inner .section-tag { color: var(--teal-light); justify-content: center; }
+  .contact-inner .section-tag::before { background: var(--teal-light); }
+  .contact-inner .section-title { color: var(--white); }
+  .contact-tagline {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 52px;
+  }
+  .contact-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 52px;
+  }
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 18px 28px;
+    border-radius: 16px;
+    transition: all var(--transition);
+    color: white;
+  }
+  .contact-card:hover {
+    background: rgba(13,148,136,0.15);
+    border-color: rgba(13,148,136,0.4);
+    transform: translateY(-3px);
+  }
+  .contact-card-icon {
+    width: 40px; height: 40px;
+    background: rgba(13,148,136,0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .contact-card-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 2px;
+  }
+  .contact-card-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .contact-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--teal);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: all var(--transition);
+  }
+  .contact-cta:hover {
+    background: var(--teal-light);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(13,148,136,0.35);
+  }
+
+  /* ────────────────────── FOOTER ────────────────────── */
+  footer {
+    background: #060e1c;
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-copy {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+  }
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+  .footer-links a {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em;
+    transition: color var(--transition);
+  }
+  .footer-links a:hover { color: var(--teal-light); }
+
+  /* ────────────────────── MOBILE MENU ────────────────────── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--navy);
+    border-radius: 2px;
+    transition: all var(--transition);
+  }
+
+  /* ────────────────────── RESPONSIVE ────────────────────── */
+  @media (max-width: 1024px) {
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .project-card.featured { grid-column: span 2; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 820px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; padding-top: 120px; }
+    .hero-right { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 70px 0; }
+    .container { padding: 0 24px; }
+  }
+  @media (max-width: 520px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  /* ────────────────────── ANIMATIONS ────────────────────── */
+  .hero-text-reveal { opacity: 0; transform: translateY(30px); }
+  .hero-text-reveal.visible {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .hero-text-reveal:nth-child(1) { transition-delay: 0.1s; }
+  .hero-text-reveal:nth-child(2) { transition-delay: 0.2s; }
+  .hero-text-reveal:nth-child(3) { transition-delay: 0.3s; }
+  .hero-text-reveal:nth-child(4) { transition-delay: 0.4s; }
+  .hero-text-reveal:nth-child(5) { transition-delay: 0.5s; }
+  .hero-text-reveal:nth-child(6) { transition-delay: 0.6s; }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">K<span>.</span>Mittal</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-blob"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow hero-text-reveal">Georgia Tech · Class of 2028</div>
+      <h1 class="hero-name hero-text-reveal">Krish<br><em>Mittal</em></h1>
+      <p class="hero-title hero-text-reveal">Mechanical Engineering + Computer Science @ Georgia Tech</p>
+      <p class="hero-tagline hero-text-reveal">
+        Building robots, exoskeletons, and industrial automation systems — where hardware meets intelligent software.
+      </p>
+      <div class="hero-actions hero-text-reveal">
+        <a href="#projects" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          View Projects
+        </a>
+        <a href="#contact" class="btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Contact Me
+        </a>
+      </div>
+      <div class="hero-stats hero-text-reveal">
+        <div>
+          <div class="hero-stat-num">12 Years</div>
+          <div class="hero-stat-label">Robot Competiton Experience</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">3 Semesters</div>
+          <div class="hero-stat-label">Robotics Research</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">5 Months</div>
+          <div class="hero-stat-label">Industry Experience</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right" data-aos="fade-left" data-aos-delay="300">
+      <div class="headshot-wrap">
+        <div class="headshot-frame">
+          <img id="headshot" src="C:\Users\botbustersadmin\Downloads\IMG_5481.jpeg" alt="Krish Mittal">
+        </div>
+        <div class="headshot-accent"></div>
+        <div class="headshot-accent2"></div>
+      </div>
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Currently @ GE Vernova
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <div data-aos="fade-up">
+      <div class="section-tag">Who I Am</div>
+      <h2 class="section-title">Engineer. Builder. Tinkerer.<br>Problem Solver.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text" data-aos="fade-up" data-aos-delay="100">
+        <p>
+          I'm a <strong>junior Mechanical Engineering student at Georgia Tech</strong> with a 4.0 GPA, minoring in Computer Science and Intelligence. Since picking up my first robotics kit around age 8, I've been obsessed with building things that actually move, think, and do something useful in the world.
+        </p>
+        <p>
+          What drives me is the intersection of physical systems and intelligent software. I've been fortunate to work across that spectrum, from <strong>FTC robotics through high school</strong> to research at Georgia Tech's EPIC Lab and back-to-back internships at <strong>GE Vernova</strong>.
+        </p>
+        <p>
+          Outside the lab, I lead the mechatronics sub-team for <strong>Georgia Tech RoboJackets</strong>' RoboCup team — managing a fleet of six autonomous soccer robots and driving a full redesign to improve weight and efficiency. 
+        </p>
+      </div>
+      <div class="about-highlights" data-aos="fade-up" data-aos-delay="200">
+        <div class="highlight-card">
+          <div class="highlight-icon">🎓</div>
+          <div>
+            <h4>Georgia Institute of Technology</h4>
+            <p>B.S. Mechanical Engineering · Minor in CS & Intelligence · GPA: 4.00 · Dean's List</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🤖</div>
+          <div>
+            <h4>RoboJackets · Mechatronics Captain</h4>
+            <p>Leading full redesign of 6-robot RoboCup fleet — targeting 25% weight reduction and 33% efficiency gains</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🦾</div>
+          <div>
+            <h4>EPIC Lab Research Assistant</h4>
+            <p>Designing robotic ankle exoskeleton with SolidWorks, FEA, and custom PCB for motor control integration</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">⚙️</div>
+          <div>
+            <h4>GE Vernova Intern — Robotics & Automation</h4>
+            <p>Engineering robotic workflow automation for turbine blade repair with OpenCV, JSON recipe logic, and HMI development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="container">
+    <div data-aos="fade-up">
+      <div class="section-tag">Career</div>
+      <h2 class="section-title">Experience</h2>
+      <p class="section-subtitle">Industry internships, research, and leadership roles that define my engineering journey.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="50">
+        <div class="timeline-dot">⚡</div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="timeline-role">Robotics & Automation Intern</div>
+            <div class="timeline-date current">Apr 2026 – Present</div>
+          </div>
+          <div class="timeline-org">GE Vernova · Greenville, SC</div>
+          <ul class="timeline-bullets">
+            <li>Engineered robotic workflow automation for <strong>turbine blade cooling hole repair</strong>, including JSON recipe logic, OpenCV camera calibration, and developer tooling for precise multi-position syringe dispensing</li>
+            <li>Spearheading end-to-end design of an <strong>automated robotic welding application</strong></li>
+            <li>Contributed to integration of robotic motion control with NDE sensing for automated coating inspection</li>
+            <li>Developed <strong>HMI interfaces</strong> for multiple vision-guided robotic arm systems for industrial repair</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="timeline-dot">🔧</div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="timeline-role">Gas Power — Mechanical Engineering Intern</div>
+            <div class="timeline-date">Jan 2026 – Apr 2026</div>
+          </div>
+          <div class="timeline-org">GE Vernova · Greenville, SC</div>
+          <ul class="timeline-bullets">
+            <li>Designed parts in <strong>NX</strong> applying electrical safety, environmental, and international compliance standards as design constraints for electromechanical systems</li>
+            <li>Developed <strong>Python automation tools</strong> for PLM management and data workflows — saving $12K+ in labor costs</li>
+            <li>Collaborated with mechanical and manufacturing teams, presenting compliance documentation to stakeholders</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="150">
+        <div class="timeline-dot">🦿</div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="timeline-role">Research Assistant</div>
+            <div class="timeline-date">Jan 2025 – Present</div>
+          </div>
+          <div class="timeline-org">Exoskeleton & Prosthetic Intelligent Controls Lab · Georgia Tech, Atlanta, GA</div>
+          <ul class="timeline-bullets">
+            <li>Designed mechanical systems integrating actuators, structure, and hardware using <strong>SolidWorks</strong>; machined & tested prototypes via laser cutting, sheet metal, additive manufacturing, and 3D printing for a <strong>robotic ankle exoskeleton</strong></li>
+            <li>Performed <strong>FEA</strong> to validate structural integrity and optimize energy efficiency under dynamic load</li>
+            <li>Designed schematic and <strong>PCB</strong> to interface with motor controller (Arduino/Jetson), enabling efficient pin connections</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="timeline-dot">🏆</div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="timeline-role">Mechatronics Sub-team Captain</div>
+            <div class="timeline-date">Sep 2024 – Present</div>
+          </div>
+          <div class="timeline-org">Georgia Tech RoboJackets · RoboCup · Atlanta, GA</div>
+          <ul class="timeline-bullets">
+            <li>Led design and integration of autonomous robot subsystems — drivetrain, motors, encoders, vision-guided control — for international competition</li>
+            <li>Driving full fleet redesign targeting <strong>25% weight reduction</strong> and <strong>33% motion efficiency improvement</strong></li>
+            <li>Assembled, operated, and troubleshot six soccer-playing autonomous robots for real-time competition performance</li>
+            <li>Collaborated with electrical and software engineers to integrate sensors, power systems, and PCBs</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="container">
+    <div class="projects-header">
+      <div data-aos="fade-up">
+        <div class="section-tag">Work</div>
+        <h2 class="section-title">Projects</h2>
+      </div>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" style="max-width:340px;">
+        From competition robots to medical devices — hardware and software, end to end.
+      </p>
+    </div>
+    <div class="projects-grid">
+
+      <!-- RoboCup SSL — FEATURED -->
+      <div class="project-card featured" data-aos="fade-up">
+        <div class="project-visual">
+          <div class="project-visual-pattern"></div>
+          <div class="project-visual-icon">⚽</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Autodesk Inventor</span>
+            <span class="tag">PCB Design</span>
+            <span class="tag">Waterjet</span>
+            <span class="tag">3D Printing</span>
+            <span class="tag dark">OpenCV</span>
+          </div>
+          <div class="project-title">RoboCup Small Size League — Georgia Tech RoboJackets</div>
+          <p class="project-desc">
+            Designed and CADed a full autonomous soccer robot system featuring a dual-PCB stack (motor control + kick/chip boards) with a solenoid plunger mechanism for ground kicking and chipping. Built a fleet of six identical robots with omnidirectional drive, waterjet aluminum chassis, and 3D-printed mounts. Achieved the team's best performance since 2016 — 4th place in division, 3rd overall Most Improved Award.
+          </p>
+          <div class="project-awards">
+            <span class="award-pill"><span class="star">★</span> 4th Place in Division</span>
+            <span class="award-pill"><span class="star">★</span> 3rd Place Most Improved</span>
+            <span class="award-pill"><span class="star">★</span> Best Since 2016</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exoskeleton -->
+      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-visual" style="background: linear-gradient(145deg, #0f2744 0%, #1a3a5c 100%);">
+          <div class="project-visual-pattern"></div>
+          <div class="project-visual-icon">🦾</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">SolidWorks</span>
+            <span class="tag">FEA</span>
+            <span class="tag">Carbon Fiber</span>
+            <span class="tag dark">PCB</span>
+          </div>
+          <div class="project-title">Robotic Ankle Exoskeleton</div>
+          <p class="project-desc">
+            Redesigned a wearable ankle exoskeleton for the EPIC Lab, achieving 65% space reduction and 70% weight savings with 35+ carbon fiber parts. Modeled motor plate, ankle cuff, shank strut, and backplate; prototyped via waterjet, laser cutting, and 3D printing. Designed custom PCB for Arduino-Jetson motor controller interface.
+          </p>
+          <div class="project-awards">
+            <span class="award-pill"><span class="star">★</span> 65% Space Reduced</span>
+            <span class="award-pill"><span class="star">★</span> 70% Weight Saved</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FTC 2023-24 — VIDEO EMBED -->
+      <div class="project-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="project-visual">
+          <!-- YOUTUBE EMBED: Replace VIDEO_ID below with the actual YouTube video ID -->
+          <!-- Example: https://www.youtube.com/embed/dQw4w9WgXcQ -->
+          <div class="project-visual-pattern"></div>
+          <div class="project-visual-icon" id="video-placeholder-icon">🎬</div>
+          <div class="video-wrapper" id="video-wrapper" style="display:none;">
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID_HERE?autoplay=0&rel=0"
+              title="FTC 2023-24 Botbusters Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">PTC Creo</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">Java</span>
+            <span class="tag dark">GD&T</span>
+          </div>
+          <div class="project-title">FTC 2023–24 · Team 14464 Botbusters</div>
+          <p class="project-desc">
+            Designed a custom multi-axis arm capable of rotating, extending vertically and laterally, and flipping to place game elements. Featured surgical tubing intake with optimized gear ratios, magnetic suspension holding the full robot weight from truss, omni-wheel chain drive with PID tuning, and OpenCV-powered autonomous operation.
+          </p>
+          <div class="project-awards">
+            <span class="award-pill"><span class="star">★</span> PA State Qualifier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FTC 2022-23 -->
+      <div class="project-card" data-aos="fade-up" data-aos-delay="50">
+        <div class="project-visual" style="background: linear-gradient(145deg, #1a2744 0%, #0d1e36 100%);">
+          <div class="project-visual-pattern"></div>
+          <div class="project-visual-icon">🏅</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">CAD</span>
+            <span class="tag">PID</span>
+            <span class="tag dark">Bevel Gears</span>
+          </div>
+          <div class="project-title">FTC 2022–23 · Team 14464 Botbusters</div>
+          <p class="project-desc">
+            Designed a custom arm extending vertically over 3 feet with a rubber clamp intake for precise cone alignment. Complete CAD of custom pieces and assembly; omni-wheel drive using bevel gears with PID tuning. Won the regional robot competition and qualified for PA State.
+          </p>
+          <div class="project-awards">
+            <span class="award-pill"><span class="star">★</span> Regional Winner</span>
+            <span class="award-pill"><span class="star">★</span> PA State Qualifier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Musical Set Piece -->
+      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-visual" style="background: linear-gradient(145deg, #1c1a10 0%, #2e2812 100%);">
+          <div class="project-visual-pattern"></div>
+          <div class="project-visual-icon">🎭</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Arduino</span>
+            <span class="tag">Servos</span>
+            <span class="tag dark">Woodworking</span>
+          </div>
+          <div class="project-title">Mechatronic Musical Stage Set</div>
+          <p class="project-desc">
+            Built a rideable wooden stage set modeled on Maurice's Invention from Beauty and the Beast. Integrated servo-driven remote-controlled props — a swinging axe to break a fake log, a bell, a broom, and a petal-dropping flower mechanism. Created safety documentation, schematics, and assembly drawings; tested in live production conditions.
+          </p>
+          <div class="project-awards">
+            <span class="award-pill"><span class="star">★</span> Live Production Deployed</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="container">
+    <div data-aos="fade-up">
+      <div class="section-tag">Toolkit</div>
+      <h2 class="section-title">Skills</h2>
+      <p class="section-subtitle">A broad set of tools across mechanical design, software, manufacturing, and systems integration.</p>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-group" data-aos="fade-up" data-aos-delay="50">
+        <div class="skill-group-header">
+          <span class="skill-group-icon">📐</span>
+          <span class="skill-group-label">CAD & Design</span>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">SolidWorks</span>
+          <span class="skill-pill">Onshape</span>
+          <span class="skill-pill">Autodesk Inventor</span>
+          <span class="skill-pill">NX (Siemens)</span>
+          <span class="skill-pill">PTC Creo</span>
+          <span class="skill-pill">GD&T</span>
+          <span class="skill-pill">DFM / DFA / DFS</span>
+          <span class="skill-pill">FEA</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-aos="fade-up" data-aos-delay="100">
+        <div class="skill-group-header">
+          <span class="skill-group-icon">💻</span>
+          <span class="skill-group-label">Programming</span>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">MATLAB</span>
+          <span class="skill-pill">OpenCV</span>
+          <span class="skill-pill">ROS</span>
+          <span class="skill-pill">Arduino</span>
+          <span class="skill-pill">PLCs</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-aos="fade-up" data-aos-delay="150">
+        <div class="skill-group-header">
+          <span class="skill-group-icon">🏭</span>
+          <span class="skill-group-label">Manufacturing</span>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">3D Printing</span>
+          <span class="skill-pill">Laser Cutting</span>
+          <span class="skill-pill">Waterjet</span>
+          <span class="skill-pill">Sheet Metal</span>
+          <span class="skill-pill">CNC Operations</span>
+          <span class="skill-pill">Carbon Fiber Layups</span>
+          <span class="skill-pill">Prototyping</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-aos="fade-up" data-aos-delay="200">
+        <div class="skill-group-header">
+          <span class="skill-group-icon">🤖</span>
+          <span class="skill-group-label">Robotics & Systems</span>
+        </div>
+        <div class="skill-pills">
+          <span class="skill-pill">Electromechanical Systems</span>
+          <span class="skill-pill">PCB Design</span>
+          <span class="skill-pill">Breadboarding</span>
+          <span class="skill-pill">Kinematics</span>
+          <span class="skill-pill">Statics</span>
+          <span class="skill-pill">PLM</span>
+          <span class="skill-pill">Systems Integration</span>
+          <span class="skill-pill">Performance Testing</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div data-aos="fade-up">
+        <div class="section-tag">Let's Connect</div>
+        <h2 class="section-title">Get in Touch</h2>
+      </div>
+      <p class="contact-tagline" data-aos="fade-up" data-aos-delay="100">
+        Always open to new opportunities, research collaborations, or just a good engineering conversation.
+      </p>
+      <div class="contact-grid" data-aos="fade-up" data-aos-delay="150">
+        <a href="mailto:krishmittal70@gmail.com" class="contact-card">
+          <div class="contact-card-icon">✉️</div>
+          <div>
+            <div class="contact-card-label">Email</div>
+            <div class="contact-card-value">krishmittal70@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/krishmittal-" target="_blank" class="contact-card">
+          <div class="contact-card-icon">💼</div>
+          <div>
+            <div class="contact-card-label">LinkedIn</div>
+            <div class="contact-card-value">linkedin.com/in/krishmittal-</div>
+          </div>
+        </a>
+        <a href="https://krish-m.com" target="_blank" class="contact-card">
+          <div class="contact-card-icon">🌐</div>
+          <div>
+            <div class="contact-card-label">Portfolio</div>
+            <div class="contact-card-value">krish-m.com</div>
+          </div>
+        </a>
+        <a href="tel:7178771110" class="contact-card">
+          <div class="contact-card-icon">📱</div>
+          <div>
+            <div class="contact-card-label">Phone</div>
+            <div class="contact-card-value">(717) 877-1110</div>
+          </div>
+        </a>
+      </div>
+      <div data-aos="fade-up" data-aos-delay="200">
+        <a href="mailto:krishmittal70@gmail.com" class="contact-cta">
+          Send Me a Message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-copy">© 2025 Krish Mittal. Designed with care.</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/krishmittal-" target="_blank">LinkedIn</a>
+    <a href="https://krish-m.com" target="_blank">Website</a>
+    <a href="mailto:krishmittal70@gmail.com">Email</a>
+  </div>
+</footer>
+
+<!-- ── AOS ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+  /* ── Navbar scroll shrink + active section ── */
+  const navbar = document.getElementById('navbar');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  function onScroll() {
+    // Shrink
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+
+    // Active section
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 160) current = s.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ── Hero reveal ── */
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.hero-text-reveal').forEach(el => el.classList.add('visible'));
+  });
+
+  /* ── Hamburger (mobile) ── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinksEl = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    const open = navLinksEl.style.display === 'flex';
+    navLinksEl.style.cssText = open
+      ? ''
+      : 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);padding:24px 24px;gap:20px;border-top:1px solid #e5e7eb;z-index:999;';
+  });
+
+  /* ── Smooth scroll for all anchor links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        // Close mobile menu if open
+        navLinksEl.style.cssText = '';
+      }
+    });
+  });
+
+  /* ── YouTube embed: remove placeholder if valid ID ── */
+  const videoWrapper = document.getElementById('video-wrapper');
+  const videoIcon = document.getElementById('video-placeholder-icon');
+  const iframeSrc = videoWrapper?.querySelector('iframe')?.getAttribute('src') || '';
+  if (iframeSrc && !iframeSrc.includes('VIDEO_ID_HERE')) {
+    videoWrapper.style.display = 'block';
+    if (videoIcon) videoIcon.style.display = 'none';
+  }
+</script>
+</body>
+</html>

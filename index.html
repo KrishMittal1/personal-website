@@ -685,6 +685,131 @@
   }
   .award-pill .star { color: #f59e0b; }
 
+  /* ────────────────────── PORTFOLIO DECK (Google Slides) ────────────────────── */
+  .deck-wrap {
+    margin-top: 64px;
+    padding-top: 56px;
+    border-top: 1px solid var(--border);
+  }
+  .deck-wrap--solo {
+    margin-top: 52px;
+    padding-top: 0;
+    border-top: none;
+  }
+  .deck-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .deck-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .deck-icon {
+    width: 40px; height: 40px;
+    background: var(--navy);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .deck-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .deck-sub {
+    font-size: 0.82rem;
+    color: var(--grey);
+    margin-top: 2px;
+  }
+  .deck-open-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--teal);
+    padding: 9px 18px;
+    margin-top: 14px;
+    border: 1.5px solid rgba(13,148,136,0.3);
+    border-radius: 100px;
+    transition: all var(--transition);
+    white-space: nowrap;
+  }
+  .deck-open-link:hover {
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
+  }
+  .deck-frame-outer {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 8px;
+    background: linear-gradient(145deg, var(--navy) 0%, var(--navy-mid) 100%);
+    box-shadow: 0 24px 60px rgba(10,22,40,0.16);
+  }
+  .deck-frame-inner {
+    position: relative;
+    width: 100%;
+    /* 16:9 aspect ratio */
+    padding-top: 56.25%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--off-white);
+  }
+  .deck-frame-inner iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .deck-frame-inner .deck-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--grey-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .deck-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .deck-autoplay-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    color: var(--grey);
+  }
+  .deck-autoplay-note .dot {
+    width: 6px; height: 6px;
+    background: var(--teal-light);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+
   /* ────────────────────── SKILLS ────────────────────── */
   #skills { background: var(--white); }
   .skills-grid {
@@ -898,6 +1023,7 @@
     .hamburger { display: flex; }
     section { padding: 70px 0; }
     .container { padding: 0 24px; }
+    .deck-frame-outer { padding: 6px; border-radius: 16px; }
   }
   @media (max-width: 520px) {
     .skills-grid { grid-template-columns: 1fr; }
@@ -928,7 +1054,7 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#projects">Portfolio</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
@@ -953,7 +1079,7 @@
       <div class="hero-actions hero-text-reveal">
         <a href="#projects" class="btn-primary">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          View Projects
+          View Portfolio
         </a>
         <a href="#contact" class="btn-secondary">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -1124,149 +1250,42 @@
   </div>
 </section>
 
-<!-- ── PROJECTS ── -->
+<!-- ── PORTFOLIO (Projects + embedded slide deck) ── -->
 <section id="projects">
   <div class="container">
     <div class="projects-header">
       <div data-aos="fade-up">
         <div class="section-tag">Work</div>
-        <h2 class="section-title">Projects</h2>
+        <h2 class="section-title">Portfolio</h2>
       </div>
       <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" style="max-width:340px;">
-        From competition robots to medical devices — hardware and software, end to end.
+        A full walkthrough of my projects, design process, and results.
+        <br>
+        <a href="https://docs.google.com/presentation/d/19t6GLChV4uD-8juOZtvpxHcxuIGgJsARnC5MPXWq48E/edit" target="_blank" rel="noopener" class="deck-open-link">
+          Open Full Deck
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
       </p>
     </div>
-    <div class="projects-grid">
-
-      <!-- RoboCup SSL — FEATURED -->
-      <div class="project-card featured" data-aos="fade-up">
-        <div class="project-visual">
-          <div class="project-visual-pattern"></div>
-          <div class="project-visual-icon">⚽</div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="tag">Autodesk Inventor</span>
-            <span class="tag">PCB Design</span>
-            <span class="tag">Waterjet</span>
-            <span class="tag">3D Printing</span>
-            <span class="tag dark">OpenCV</span>
-          </div>
-          <div class="project-title">RoboCup Small Size League — Georgia Tech RoboJackets</div>
-          <p class="project-desc">
-            Designed and CADed a full autonomous soccer robot system featuring a dual-PCB stack (motor control + kick/chip boards) with a solenoid plunger mechanism for ground kicking and chipping. Built a fleet of six identical robots with omnidirectional drive, waterjet aluminum chassis, and 3D-printed mounts. Achieved the team's best performance since 2016 — 4th place in division, 3rd overall Most Improved Award.
-          </p>
-          <div class="project-awards">
-            <span class="award-pill"><span class="star">★</span> 4th Place in Division</span>
-            <span class="award-pill"><span class="star">★</span> 3rd Place Most Improved</span>
-            <span class="award-pill"><span class="star">★</span> Best Since 2016</span>
-          </div>
+    <!-- ── Embedded Google Slides deck ── -->
+    <div class="deck-wrap deck-wrap--solo" data-aos="fade-up">
+      <div class="deck-frame-outer">
+        <div class="deck-frame-inner">
+          <div class="deck-loading" id="deck-loading">Loading slides…</div>
+          <iframe
+            src="https://docs.google.com/presentation/d/19t6GLChV4uD-8juOZtvpxHcxuIGgJsARnC5MPXWq48E/embed?start=true&loop=true&delayms=4000&rm=minimal"
+            title="Krish Mittal — Engineering Portfolio Deck"
+            allowfullscreen="true"
+            frameborder="0"
+            onload="document.getElementById('deck-loading').style.display='none';">
+          </iframe>
         </div>
       </div>
-
-      <!-- Exoskeleton -->
-      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="project-visual" style="background: linear-gradient(145deg, #0f2744 0%, #1a3a5c 100%);">
-          <div class="project-visual-pattern"></div>
-          <div class="project-visual-icon">🦾</div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="tag">SolidWorks</span>
-            <span class="tag">FEA</span>
-            <span class="tag">Carbon Fiber</span>
-            <span class="tag dark">PCB</span>
-          </div>
-          <div class="project-title">Robotic Ankle Exoskeleton</div>
-          <p class="project-desc">
-            Redesigned a wearable ankle exoskeleton for the EPIC Lab, achieving 65% space reduction and 70% weight savings with 35+ carbon fiber parts. Modeled motor plate, ankle cuff, shank strut, and backplate; prototyped via waterjet, laser cutting, and 3D printing. Designed custom PCB for Arduino-Jetson motor controller interface.
-          </p>
-          <div class="project-awards">
-            <span class="award-pill"><span class="star">★</span> 65% Space Reduced</span>
-            <span class="award-pill"><span class="star">★</span> 70% Weight Saved</span>
-          </div>
-        </div>
+      <div class="deck-footer">
+        <span class="deck-autoplay-note"><span class="dot"></span>Auto-advancing every few seconds — click anywhere on the deck to browse at your own pace</span>
       </div>
-
-      <!-- FTC 2023-24 — VIDEO EMBED -->
-      <div class="project-card" data-aos="fade-up" data-aos-delay="150">
-        <div class="project-visual">
-          <!-- YOUTUBE EMBED: Replace VIDEO_ID below with the actual YouTube video ID -->
-          <!-- Example: https://www.youtube.com/embed/dQw4w9WgXcQ -->
-          <div class="project-visual-pattern"></div>
-          <div class="project-visual-icon" id="video-placeholder-icon">🎬</div>
-          <div class="video-wrapper" id="video-wrapper" style="display:none;">
-            <iframe
-              src="https://www.youtube.com/embed/VIDEO_ID_HERE?autoplay=0&rel=0"
-              title="FTC 2023-24 Botbusters Demo"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="tag">PTC Creo</span>
-            <span class="tag">OpenCV</span>
-            <span class="tag">Java</span>
-            <span class="tag dark">GD&T</span>
-          </div>
-          <div class="project-title">FTC 2023–24 · Team 14464 Botbusters</div>
-          <p class="project-desc">
-            Designed a custom multi-axis arm capable of rotating, extending vertically and laterally, and flipping to place game elements. Featured surgical tubing intake with optimized gear ratios, magnetic suspension holding the full robot weight from truss, omni-wheel chain drive with PID tuning, and OpenCV-powered autonomous operation.
-          </p>
-          <div class="project-awards">
-            <span class="award-pill"><span class="star">★</span> PA State Qualifier</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- FTC 2022-23 -->
-      <div class="project-card" data-aos="fade-up" data-aos-delay="50">
-        <div class="project-visual" style="background: linear-gradient(145deg, #1a2744 0%, #0d1e36 100%);">
-          <div class="project-visual-pattern"></div>
-          <div class="project-visual-icon">🏅</div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="tag">CAD</span>
-            <span class="tag">PID</span>
-            <span class="tag dark">Bevel Gears</span>
-          </div>
-          <div class="project-title">FTC 2022–23 · Team 14464 Botbusters</div>
-          <p class="project-desc">
-            Designed a custom arm extending vertically over 3 feet with a rubber clamp intake for precise cone alignment. Complete CAD of custom pieces and assembly; omni-wheel drive using bevel gears with PID tuning. Won the regional robot competition and qualified for PA State.
-          </p>
-          <div class="project-awards">
-            <span class="award-pill"><span class="star">★</span> Regional Winner</span>
-            <span class="award-pill"><span class="star">★</span> PA State Qualifier</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Musical Set Piece -->
-      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="project-visual" style="background: linear-gradient(145deg, #1c1a10 0%, #2e2812 100%);">
-          <div class="project-visual-pattern"></div>
-          <div class="project-visual-icon">🎭</div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="tag">Arduino</span>
-            <span class="tag">Servos</span>
-            <span class="tag dark">Woodworking</span>
-          </div>
-          <div class="project-title">Mechatronic Musical Stage Set</div>
-          <p class="project-desc">
-            Built a rideable wooden stage set modeled on Maurice's Invention from Beauty and the Beast. Integrated servo-driven remote-controlled props — a swinging axe to break a fake log, a bell, a broom, and a petal-dropping flower mechanism. Created safety documentation, schematics, and assembly drawings; tested in live production conditions.
-          </p>
-          <div class="project-awards">
-            <span class="award-pill"><span class="star">★</span> Live Production Deployed</span>
-          </div>
-        </div>
-      </div>
-
     </div>
+
   </div>
 </section>
 
